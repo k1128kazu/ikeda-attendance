@@ -1,0 +1,987 @@
+body {
+    background: #eee;
+    font-family: sans-serif;
+}
+
+.auth-container {
+    width: 500px;
+    margin: 80px auto;
+}
+
+.auth-title {
+    text-align: center;
+    font-size: 26px;
+    margin-bottom: 30px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 6px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
+.register-button {
+    width: 100%;
+    background: black;
+    color: white;
+    padding: 12px;
+    border: none;
+}
+
+.login-link {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.login-link a {
+    color: #0073cc;
+}
+
+/* =========================
+   共通
+========================= */
+
+body {
+    background-color: #eeeeee;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+/* =========================
+   認証画面コンテナ
+========================= */
+
+.auth-container {
+    width: 500px;
+    margin: 80px auto;
+}
+
+
+/* =========================
+   タイトル
+========================= */
+
+.auth-title {
+    text-align: center;
+    font-size: 26px;
+    font-weight: bold;
+    margin-bottom: 40px;
+}
+
+
+/* =========================
+   フォーム
+========================= */
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.form-group input {
+    width: 100%;
+    height: 40px;
+    padding: 8px;
+    border: 1px solid #cccccc;
+    border-radius: 3px;
+}
+
+
+/* =========================
+   ボタン
+========================= */
+
+.auth-button {
+    width: 100%;
+    height: 45px;
+    background: black;
+    color: white;
+    font-size: 16px;
+    border: none;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+.auth-button:hover {
+    opacity: 0.9;
+}
+
+
+/* =========================
+   下部リンク
+========================= */
+
+.auth-link {
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.auth-link a {
+    color: #0073cc;
+    text-decoration: none;
+}
+.auth-link a:hover {
+    text-decoration: underline;
+}
+
+.auth-container {
+    max-width: 600px;
+    margin: 80px auto;
+    text-align: center;
+}
+
+.auth-title {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 40px;
+}
+
+.verify-box {
+    background: #f5f5f5;
+    padding: 60px 40px;
+    border-radius: 4px;
+}
+.verify-text {
+    font-size: 14px;
+    text-align: center;
+    line-height: 1.8;
+    margin-bottom: 40px;
+}
+.verify-button-area {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.verify-button {
+    display: inline-block;
+    padding: 12px 40px;
+    background: #d9d9d9;
+    border-radius: 6px;
+    text-decoration: none;
+    color: #000;
+}
+
+.resend-link {
+    display: block;
+    margin: 20px auto 0;
+    background: none;
+    border: none;
+    color: #3b82f6;
+    font-size: 14px;
+    cursor: pointer;
+    text-decoration: underline;
+}
+.verify-resend {
+    display: block;
+    margin: 20px auto 0;
+    background: none;
+    border: none;
+    color: #3b82f6;
+    font-size: 14px;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+/* ===== 勤怠画面 ===== */
+
+.attendance-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 80px);
+    background: #f5f5f5;
+}
+
+/* 中央ブロック */
+
+.attendance-box {
+    text-align: center;
+}
+
+/* 勤務外ラベル */
+
+.attendance-status {
+    display: inline-block;
+    background: #e5e5e5;
+    padding: 6px 18px;
+    border-radius: 20px;
+    font-size: 14px;
+    margin-bottom: 30px;
+}
+
+/* 日付 */
+
+.attendance-date {
+    font-size: 26px;
+    margin-bottom: 15px;
+}
+
+/* 時刻 */
+
+.attendance-time {
+    font-size: 96px;
+    font-weight: bold;
+    margin-bottom: 40px;
+}
+
+/* 出勤ボタン */
+
+.attendance-btn {
+    background: #000;
+    color: #fff;
+    border: none;
+    padding: 18px 70px;
+    font-size: 22px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.attendance-btn:hover {
+    opacity: 0.8;
+}
+
+/* ボタン横並び */
+
+.attendance-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+/* 通常ボタン */
+
+.attendance-btn {
+    background: black;
+    color: white;
+    border: none;
+    padding: 18px 70px;
+    font-size: 22px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+/* 休憩ボタン */
+
+.attendance-btn-light {
+    background: #e5e5e5;
+    color: black;
+}
+
+/* 勤怠画面 */
+
+.attendance-wrapper {
+    height: calc(100vh - 80px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #f3f3f3;
+}
+
+/* ステータス */
+
+.attendance-status {
+    background: #e5e5e5;
+    padding: 6px 18px;
+    border-radius: 20px;
+    font-size: 14px;
+    margin-bottom: 30px;
+}
+
+/* 日付 */
+
+.attendance-date {
+    font-size: 26px;
+    margin-bottom: 10px;
+}
+
+/* 時刻 */
+
+.attendance-time {
+    font-size: 96px;
+    font-weight: bold;
+    margin-bottom: 40px;
+}
+
+/* ボタン横並び */
+
+.attendance-btn-group {
+    display: flex;
+    gap: 40px;
+}
+
+/* 共通ボタン */
+
+.btn-black,
+.btn-white {
+    width: 200px;
+    height: 60px;
+    font-size: 20px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+/* 黒ボタン */
+
+.btn-black {
+    background: #000;
+    color: #fff;
+    border: none;
+}
+
+/* 白ボタン */
+
+.btn-white {
+    background: #fff;
+    color: #000;
+    border: none;
+}
+
+/* 退勤後 */
+
+.attendance-finish {
+    font-size: 20px;
+    margin-top: 20px;
+}
+
+/* ===== 勤怠一覧画面 ===== */
+
+.attendance-list-container {
+    width: 900px;
+    margin: 40px auto;
+}
+
+/* タイトル */
+
+.attendance-list-title {
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+
+/* 月ナビ */
+
+.attendance-month-nav {
+    background: #fff;
+    border-radius: 10px;
+    padding: 15px 20px;
+    margin-bottom: 20px;
+
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+}
+
+/* 前月 */
+
+.month-prev {
+    justify-self: start;
+    text-decoration: none;
+    color: #333;
+}
+
+/* 中央年月 */
+
+.month-center {
+    justify-self: center;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* 翌月 */
+
+.month-next {
+    justify-self: end;
+    text-decoration: none;
+    color: #333;
+}
+
+/* テーブル枠 */
+
+.attendance-table-box {
+    background: #fff;
+    border-radius: 10px;
+}
+/* テーブル */
+
+.attendance-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+/* ヘッダー */
+
+.attendance-table th {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* 行 */
+
+.attendance-table td {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    text-align: center;
+}
+
+/* 詳細リンク */
+
+.attendance-detail-link {
+    color: #000;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.month-picker {
+    border: none;
+    font-size: 18px;
+    font-weight: bold;
+    background: transparent;
+    text-align: center;
+}
+
+.month-form {
+    position: relative;
+}
+
+.month-display {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* inputは完全非表示 */
+
+.month-form {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* 年月 */
+
+.month-text {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* カレンダークリック用 */
+
+.month-input {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.month-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.month-hidden {
+    position: absolute;
+    left: -9999px;
+}
+
+.month-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.month-picker {
+    border: none;
+    background: transparent;
+    font-size: 18px;
+    font-weight: bold;
+}
+.month-picker::-webkit-calendar-picker-indicator {
+    display: none;
+}
+
+.month-picker {
+    appearance: auto;
+    -webkit-appearance: auto;
+    border: 1px solid #ccc;
+    background: white;
+    cursor: pointer;
+}
+
+.month-hidden {
+    position: absolute;
+    left: -9999px;
+}
+
+.calendar-icon {
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.month-text {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.attendance-month-nav {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+}
+
+.month-prev {
+    justify-self: start;
+}
+
+.month-center {
+    justify-self: center;
+}
+
+.month-next {
+    justify-self: end;
+}
+
+.attendance-list-container {
+    width: 900px;
+    margin: 40px auto;
+}
+
+.attendance-list-container {
+    width: 1120px;
+    margin: 40px auto 0;
+}
+
+.attendance-month-nav,
+.attendance-table-box {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    box-sizing: border-box;
+}
+
+.attendance-list-container {
+    width: 1000px;
+    margin: 40px auto;
+}
+
+.attendance-month-nav {
+    width: 100%;
+}
+
+.attendance-table-box {
+    width: 100%;
+}
+
+.attendance-list-container {
+    width: 900px;
+    margin: 40px auto;
+}
+
+.attendance-month-nav {
+    width: 100%;
+}
+
+.attendance-table-box {
+    width: 100%;
+}
+
+.attendance-table {
+    width: 100%;
+}
+
+/* 勤怠詳細 */
+
+.attendance-detail-container {
+    width: 900px;
+    margin: 40px auto;
+}
+
+.attendance-detail-title {
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+
+.attendance-detail-card {
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.attendance-row {
+    display: flex;
+    border-bottom: 1px solid #eee;
+    padding: 20px;
+    align-items: center;
+}
+
+.attendance-label {
+    width: 150px;
+    color: #666;
+}
+
+.attendance-value {
+    flex: 1;
+}
+
+.attendance-time {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.attendance-time input {
+    width: 80px;
+    padding: 6px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.attendance-tilde {
+    margin: 0 10px;
+}
+
+.attendance-note {
+    width: 100%;
+    height: 80px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px;
+    resize: none;
+}
+
+.attendance-edit-area {
+    text-align: right;
+    margin-top: 20px;
+}
+
+.attendance-edit-btn {
+    background: #000;
+    color: #fff;
+    padding: 10px 30px;
+    border-radius: 6px;
+    text-decoration: none;
+}
+.attendance-tilde {
+    font-size: 20px;
+    margin: 0 20px;
+}
+
+
+.attendance-detail-container {
+    width: 900px;
+    margin: 40px auto;
+}
+
+.attendance-detail-title {
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+
+.attendance-detail-card {
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.attendance-row {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+    padding: 22px 24px;
+}
+
+.attendance-label {
+    width: 180px;
+    color: #666;
+}
+
+.attendance-value {
+    flex: 1;
+    font-weight: bold;
+}
+
+.attendance-date-value {
+    display: flex;
+    gap: 80px;
+}
+
+.attendance-time {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.attendance-time input {
+    width: 90px;
+    height: 36px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    text-align: center;
+    font-size: 16px;
+}
+
+.attendance-tilde {
+    font-size: 20px;
+}
+
+.attendance-note-row {
+    align-items: flex-start;
+}
+
+.attendance-note-wrap {
+    flex: 1;
+}
+
+.attendance-note {
+    width: 220px;
+    height: 72px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px;
+    resize: none;
+    font-size: 14px;
+}
+
+.attendance-edit-area {
+    text-align: right;
+    margin-top: 20px;
+}
+
+.attendance-edit-btn {
+    background: #000;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 32px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.attendance-error {
+    color: red;
+    font-size: 14px;
+    margin-top: 8px;
+}
+
+input[readonly],
+textarea[readonly] {
+    background: #fff;
+}
+
+.error {
+    color: #e54848;
+    font-size: 14px;
+    margin-top: 6px;
+}
+
+.attendance-input-area {
+    display: flex;
+    flex-direction: column;
+}
+
+.error {
+    color: #e54848;
+    font-size: 14px;
+    margin-top: 6px;
+}
+/* =========================
+   勤怠詳細画面
+========================= */
+
+.attendance-detail-wrapper {
+    width: 900px;
+    margin: 40px auto;
+}
+
+.attendance-detail-title {
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+
+.attendance-detail-box {
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.attendance-row {
+    display: flex;
+    align-items: center;
+    padding: 25px 30px;
+    border-bottom: 1px solid #eee;
+}
+
+.attendance-label {
+    width: 160px;
+    color: #666;
+}
+
+.attendance-value {
+    flex: 1;
+}
+
+.attendance-input-group {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.attendance-time-input {
+    width: 120px;
+    height: 40px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 5px 10px;
+}
+
+.attendance-wave {
+    font-size: 20px;
+}
+
+.attendance-note {
+    width: 400px;
+    height: 120px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 10px;
+}
+
+.attendance-submit-area {
+    width: 900px;
+    margin: 30px auto;
+    text-align: right;
+}
+
+.attendance-submit-btn {
+    background: #000;
+    color: #fff;
+    padding: 12px 40px;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.attendance-date-group {
+    display: flex;
+    align-items: center;
+    gap: 56px;
+}
+
+.attendance-date-year,
+.attendance-date-md {
+    display: inline-block;
+    width: 120px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.attendance-note {
+    width: 400px;
+    height: 90px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 10px;
+}
+
+/* 申請一覧 */
+
+.request-page {
+    width: 100%;
+}
+
+.request-page__inner {
+    width: 900px;
+    margin: 60px auto;
+}
+
+/* タイトル */
+.request-page__title {
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 40px;
+}
+
+/* タブ */
+.request-page__tabs {
+    display: flex;
+    gap: 60px;
+    border-bottom: 1px solid #000;
+    margin-bottom: 30px;
+}
+
+.request-page__tab {
+    text-decoration: none;
+    color: #000;
+    font-size: 16px;
+    padding-bottom: 10px;
+}
+
+.request-page__tab.is-active {
+    font-weight: bold;
+    border-bottom: 3px solid #000;
+}
+
+/* テーブル */
+.request-page__table-wrap {
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.request-page__table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.request-page__table th {
+    background: #f5f5f5;
+    padding: 16px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.request-page__table td {
+    padding: 16px;
+    text-align: center;
+    border-top: 1px solid #e5e5e5;
+}
+
+.request-page__detail-link {
+    text-decoration: none;
+    font-weight: bold;
+    color: #000;
+}

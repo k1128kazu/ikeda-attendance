@@ -20,7 +20,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     protected $hidden = [
         'password',
-        'remember_token', // ← ★ここ
+        'remember_token',
     ];
 
     /*
@@ -56,5 +56,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public function isAdmin(): bool
     {
         return $this->role === 'admin';
+    }
+
+    public function hasVerifiedEmail()
+    {
+        return ! is_null($this->email_verified_at);
     }
 }

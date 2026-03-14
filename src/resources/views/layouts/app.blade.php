@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>@yield('title', '勤怠管理システム')</title>
     <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
+    @yield('css')
 </head>
 
 <body>
@@ -37,7 +38,7 @@
 
                 <a href="/attendance">勤怠</a>
                 <a href="/attendance/list">勤怠一覧</a>
-                <a href="/corrections">申請一覧</a>
+                <a href="/corrections">申請</a>
 
                 <a href="#"
                     onclick="event.preventDefault(); document.getElementById('user-logout').submit();">

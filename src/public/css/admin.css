@@ -663,3 +663,177 @@ table {
     text-decoration: none;
     border-radius: 4px;
 }
+/* 勤怠詳細画面 修復 */
+
+.admin-detail-card {
+    background: #fff;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid #e5e5e5;
+}
+
+.detail-row {
+    display: flex;
+    align-items: center;
+    padding: 20px 30px;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.detail-label {
+    width: 180px;
+    font-weight: bold;
+    color: #555;
+}
+
+.detail-value {
+    flex: 1;
+}
+
+.date-pair {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.time-pair {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.time-pair input {
+    width: 120px;
+    padding: 6px 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+textarea {
+    width: 420px;
+    height: 120px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.detail-button-area {
+    text-align: right;
+    margin-top: 30px;
+}
+
+
+/* ===== 勤怠詳細画面レイアウト ===== */
+
+.admin-detail-card {
+    width: 100%;
+    background: #fff;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    overflow: hidden;
+}
+
+.detail-row {
+    display: flex;
+    align-items: center;
+    padding: 22px 30px;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.detail-row:last-child {
+    border-bottom: none;
+}
+
+.detail-label {
+    width: 180px;
+    font-weight: bold;
+    color: #555;
+}
+
+.detail-value {
+    flex: 1;
+}
+
+/* 日付表示 */
+
+.date-pair {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.date-left {
+    font-weight: bold;
+}
+
+.date-mid {
+    width: 10px;
+}
+
+.date-right {
+    font-weight: bold;
+}
+
+/* 時刻入力 */
+
+.time-pair {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.time-pair input {
+    width: 120px;
+    height: 36px;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+/* 備考 */
+
+textarea {
+    width: 460px;
+    height: 120px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 10px;
+    resize: none;
+}
+
+/* ボタン */
+
+.detail-button-area {
+    display: flex;
+    justify-content: flex-end;
+    padding: 25px 30px;
+}
+
+.detail-edit-button {
+    background: #000;
+    color: #fff;
+    border: none;
+    padding: 12px 40px;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.detail-edit-button:hover {
+    opacity: 0.85;
+}
+
+/* エラーメッセージ */
+
+.error-message {
+    color: red;
+    margin-bottom: 20px;
+}
+
+
+/* 管理画面コンテナ */
+
+.admin-container {
+    width: 900px;
+    margin: 40px auto;
+}
