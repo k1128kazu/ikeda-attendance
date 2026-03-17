@@ -1,0 +1,33 @@
+<?php
+
+namespace Database\Factories;
+
+use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\AttendanceCorrectionRequest;
+use App\Models\User;
+use App\Models\Attendance;
+
+class AttendanceCorrectionRequestFactory extends Factory
+{
+    protected $model = AttendanceCorrectionRequest::class;
+
+    public function definition()
+    {
+        return [
+            'attendance_id' => Attendance::factory(),
+            'user_id' => User::factory(),
+            'request_clock_in' => '09:30:00',
+            'request_clock_out' => '18:30:00',
+            'request_note' => '修正申請テスト',
+            'status' => 'pending',
+            'approved_by' => null,
+        ];
+    }
+
+    public function approved()
+    {
+        return $this->state([
+            'status' => 'approved'
+        ]);
+    }
+}

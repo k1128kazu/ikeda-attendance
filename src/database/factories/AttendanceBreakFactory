@@ -1,0 +1,21 @@
+<?php
+
+namespace Database\Factories;
+
+use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\AttendanceBreak;
+use App\Models\Attendance;
+
+class AttendanceBreakFactory extends Factory
+{
+    protected $model = AttendanceBreak::class;
+
+    public function definition()
+    {
+        return [
+            'attendance_id' => Attendance::factory(),
+            'break_start' => '12:00:00',
+            'break_end' => '13:00:00',
+        ];
+    }
+}
