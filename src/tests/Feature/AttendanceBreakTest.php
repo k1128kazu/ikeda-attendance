@@ -1,18 +1,33 @@
-/** @test */
-public function 休憩入できる()
+<?php
+
+namespace Tests\Feature;
+
+use Tests\TestCase;
+use App\Models\User;
+use App\Models\Attendance;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+
+class AttendanceBreakTest extends TestCase
 {
-$user=User::factory()->create();
+    use RefreshDatabase;
 
-$attendance=Attendance::factory()->create([
-'user_id'=>$user->id,
-'status'=>'working'
-]);
+    /** @test */
+    public function 休憩入できる()
+    {
+        $user = User::factory()->create();
 
-$this->actingAs($user);
+        $attendance = Attendance::factory()->create([
+            'user_id' => $user->id,
+            'work_date' => now()->toDateString(),
+            'status' => 'working'
+        ]);
 
-$this->post('/attendance/break-start');
+        $this->actingAs($user);
 
-$this->assertDatabaseHas('attendance_breaks',[
-'attendance_id'=>$attendance->id
-]);
+        $this->post('/attendance/break-in');
+
+        $this->assertDatabaseHas('attendance_breaks', [
+            'attendance_id' => $attendance->id
+        ]);
+    }
 }

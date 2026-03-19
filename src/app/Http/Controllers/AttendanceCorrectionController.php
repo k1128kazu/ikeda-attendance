@@ -19,35 +19,24 @@ class AttendanceCorrectionController extends Controller
     public function store(AttendanceCorrectionRequest $request, $id)
     {
         $attendance = Attendance::findOrFail($id);
-
         $user = Auth::user();
 
         DB::transaction(function () use ($request, $attendance, $user) {
 
-            /*
-            修正申請作成
-            */
-
             $correction = CorrectionRequest::create([
                 'attendance_id'      => $attendance->id,
                 'user_id'            => $user->id,
-                'request_clock_in'   => $request->clock_in ?: null,
-                'request_clock_out'  => $request->clock_out ?: null,
+                'request_clock_in'   => $request->filled('clock_in') ? $request->clock_in : null,
+                'request_clock_out'  => $request->filled('clock_out') ? $request->clock_out : null,
                 'request_note'       => $request->note,
                 'status'             => 'pending'
             ]);
-
-            /*
-            休憩申請保存
-            */
 
             foreach ($request->break_start ?? [] as $index => $breakStart) {
 
                 $breakEnd = $request->break_end[$index] ?? null;
 
-                $hasValue = !empty($breakStart) || !empty($breakEnd);
-
-                if (!$hasValue) {
+                if (empty($breakStart) && empty($breakEnd)) {
                     continue;
                 }
 
@@ -63,6 +52,7 @@ class AttendanceCorrectionController extends Controller
             ->route('corrections.index')
             ->with('success', '修正申請を送信しました。');
     }
+
     public function index()
     {
         $status = request('status', 'pending');

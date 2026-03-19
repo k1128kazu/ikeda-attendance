@@ -13,12 +13,15 @@
     <header class="app-header">
         <div class="app-header-inner">
 
+            {{-- ロゴは常に表示 --}}
             <div class="app-logo">
                 <img src="{{ asset('image/COACHTECHヘッダーロゴ.png') }}" alt="COACHTECH">
             </div>
 
+            {{-- ナビはログイン時のみ --}}
             @auth
             <nav class="app-nav">
+
                 @if(auth()->user()->role === 'admin')
 
                 <a href="/admin">勤怠一覧</a>
@@ -50,12 +53,12 @@
                 </form>
 
                 @endif
+
             </nav>
             @endauth
 
         </div>
     </header>
-
     <main>
         @yield('content')
     </main>

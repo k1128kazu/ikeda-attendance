@@ -9,9 +9,16 @@
 <div class="attendance-wrapper">
 
     <div class="attendance-status">
-        {{ $status === 'working' ? '出勤中' : '勤務外' }}
+        @if($status === 'working')
+        出勤中
+        @elseif($status === 'breaking')
+        休憩中
+        @elseif($status === 'finished')
+        退勤済
+        @else
+        勤務外
+        @endif
     </div>
-
     <div class="attendance-date">
         {{ now()->isoFormat('YYYY年M月D日(ddd)') }}
     </div>

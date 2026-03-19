@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Models\AttendanceCorrectionRequest;
 
 class AdminAttendanceUpdateRequest extends FormRequest
 {
@@ -35,48 +36,21 @@ class AdminAttendanceUpdateRequest extends FormRequest
 
             /*
             |--------------------------------------------------------------------------
-            | 2) 休憩開始（出勤〜退勤の範囲内）
+            | 2) 休憩（可変）
             |--------------------------------------------------------------------------
             */
-            'break1_start' => [
+            'break_start.*' => [
                 'nullable',
                 'date_format:H:i',
-                'after_or_equal:clock_in',
-                'before_or_equal:clock_out',
             ],
-            'break2_start' => [
+            'break_end.*' => [
                 'nullable',
                 'date_format:H:i',
-                'after_or_equal:clock_in',
-                'before_or_equal:clock_out',
             ],
 
             /*
             |--------------------------------------------------------------------------
-            | 3) 休憩終了
-            | - 休憩開始より後
-            | - 退勤より後は禁止
-            | - 終了だけ入力された場合もエラーにする
-            |--------------------------------------------------------------------------
-            */
-            'break1_end' => [
-                'nullable',
-                'date_format:H:i',
-                'required_with:break1_start',
-                'after:break1_start',
-                'before_or_equal:clock_out',
-            ],
-            'break2_end' => [
-                'nullable',
-                'date_format:H:i',
-                'required_with:break2_start',
-                'after:break2_start',
-                'before_or_equal:clock_out',
-            ],
-
-            /*
-            |--------------------------------------------------------------------------
-            | 4) 備考
+            | 3) 備考
             |--------------------------------------------------------------------------
             */
             'note' => [
@@ -88,31 +62,96 @@ class AdminAttendanceUpdateRequest extends FormRequest
     public function messages()
     {
         return [
-            // 1) 出勤・退勤（仕様メッセージ）
+            // 出勤・退勤
             'clock_in.before'  => '出勤時間もしくは退勤時間が不適切な値です',
             'clock_out.after'  => '出勤時間もしくは退勤時間が不適切な値です',
 
-            // 2) 休憩開始（仕様メッセージ）
-            'break1_start.after_or_equal'  => '休憩時間が不適切な値です',
-            'break1_start.before_or_equal' => '休憩時間が不適切な値です',
-            'break2_start.after_or_equal'  => '休憩時間が不適切な値です',
-            'break2_start.before_or_equal' => '休憩時間が不適切な値です',
+            // 休憩
+            'break_start.*.date_format' => '休憩時間が不適切な値です',
+            'break_end.*.date_format'   => '休憩時間が不適切な値です',
 
-            // 3) 休憩終了（仕様メッセージ）
-            // - 開始より後でない → 「休憩時間が不適切」
-            'break1_end.after' => '休憩時間が不適切な値です',
-            'break2_end.after' => '休憩時間が不適切な値です',
-
-            // - 退勤より後 → 「休憩時間もしくは退勤時間が不適切」
-            'break1_end.before_or_equal' => '休憩時間もしくは退勤時間が不適切な値です',
-            'break2_end.before_or_equal' => '休憩時間もしくは退勤時間が不適切な値です',
-
-            // - 終了だけ入力された → 「休憩時間が不適切」
-            'break1_end.required_with' => '休憩時間が不適切な値です',
-            'break2_end.required_with' => '休憩時間が不適切な値です',
-
-            // 4) 備考（仕様メッセージ）
+            // 備考
             'note.required' => '備考を記入してください',
         ];
+    }
+
+    public function withValidator($validator)
+    {
+        $validator->after(function ($validator) {
+
+            $attendanceId = $this->route('id');
+
+            /*
+            ----------------------------------
+            承認待ちチェック
+            ----------------------------------
+            */
+            $hasPending = AttendanceCorrectionRequest::where('attendance_id', $attendanceId)
+                ->where('status', 'pending')
+                ->exists();
+
+            if ($hasPending) {
+                $validator->errors()->add(
+                    'attendance',
+                    '承認待ちの申請があるため編集できません'
+                );
+                return;
+            }
+
+            /*
+            ----------------------------------
+            休憩ロジックチェック（可変）
+            ----------------------------------
+            */
+            $clockIn  = $this->clock_in;
+            $clockOut = $this->clock_out;
+
+            $starts = $this->break_start ?? [];
+            $ends   = $this->break_end ?? [];
+
+            foreach ($starts as $i => $start) {
+
+                $end = $ends[$i] ?? null;
+
+                // 両方空はOK
+                if (!$start && !$end) continue;
+
+                // 片方だけ入力 → NG
+                if (!$start || !$end) {
+                    $validator->errors()->add(
+                        "break_start.$i",
+                        '休憩時間が不適切な値です'
+                    );
+                    return;
+                }
+
+                // 開始 >= 終了 → NG
+                if ($start >= $end) {
+                    $validator->errors()->add(
+                        "break_start.$i",
+                        '休憩時間が不適切な値です'
+                    );
+                    return;
+                }
+
+                // 出勤前 → NG
+                if ($clockIn && $start < $clockIn) {
+                    $validator->errors()->add(
+                        "break_start.$i",
+                        '休憩時間が不適切な値です'
+                    );
+                    return;
+                }
+
+                // 退勤後 → NG
+                if ($clockOut && $end > $clockOut) {
+                    $validator->errors()->add(
+                        "break_end.$i",
+                        '休憩時間もしくは退勤時間が不適切な値です'
+                    );
+                    return;
+                }
+            }
+        });
     }
 }

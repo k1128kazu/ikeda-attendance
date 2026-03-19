@@ -1,19 +1,34 @@
-/** @test */
-public function 退勤できる()
+<?php
+
+namespace Tests\Feature;
+
+use Tests\TestCase;
+use App\Models\User;
+use App\Models\Attendance;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+
+class AttendanceClockOutTest extends TestCase
 {
-$user=User::factory()->create();
+    use RefreshDatabase;
 
-$attendance=Attendance::factory()->create([
-'user_id'=>$user->id,
-'status'=>'working'
-]);
+    /** @test */
+    public function 退勤できる()
+    {
+        $user = User::factory()->create();
 
-$this->actingAs($user);
+        $attendance = Attendance::factory()->create([
+            'user_id' => $user->id,
+            'work_date' => now()->toDateString(),
+            'status' => 'working'
+        ]);
 
-$this->post('/attendance/clockout');
+        $this->actingAs($user);
 
-$this->assertDatabaseHas('attendances',[
-'id'=>$attendance->id,
-'status'=>'finished'
-]);
+        $this->post('/attendance/clock-out'); // ←ここも重要
+
+        $this->assertDatabaseHas('attendances', [
+            'id' => $attendance->id,
+            'status' => 'finished'
+        ]);
+    }
 }
