@@ -135,6 +135,7 @@ body {
     color: #0073cc;
     text-decoration: none;
 }
+
 .auth-link a:hover {
     text-decoration: underline;
 }
@@ -156,12 +157,14 @@ body {
     padding: 60px 40px;
     border-radius: 4px;
 }
+
 .verify-text {
     font-size: 14px;
     text-align: center;
     line-height: 1.8;
     margin-bottom: 40px;
 }
+
 .verify-button-area {
     text-align: center;
     margin-bottom: 30px;
@@ -186,6 +189,7 @@ body {
     cursor: pointer;
     text-decoration: underline;
 }
+
 .verify-resend {
     display: block;
     margin: 20px auto 0;
@@ -416,6 +420,7 @@ body {
     background: #fff;
     border-radius: 10px;
 }
+
 /* テーブル */
 
 .attendance-table {
@@ -521,6 +526,7 @@ body {
     font-size: 18px;
     font-weight: bold;
 }
+
 .month-picker::-webkit-calendar-picker-indicator {
     display: none;
 }
@@ -687,6 +693,7 @@ body {
     border-radius: 6px;
     text-decoration: none;
 }
+
 .attendance-tilde {
     font-size: 20px;
     margin: 0 20px;
@@ -811,6 +818,7 @@ textarea[readonly] {
     font-size: 14px;
     margin-top: 6px;
 }
+
 /* =========================
    勤怠詳細画面
 ========================= */

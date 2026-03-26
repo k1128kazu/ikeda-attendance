@@ -20,7 +20,6 @@
         </div>
 
         <div class="month-center">
-
             <form method="GET" action="{{ route('attendance.list') }}" id="monthForm">
 
                 <span
@@ -31,19 +30,17 @@
                 </span>
 
                 <span class="month-text">
-                    {{ \Carbon\Carbon::parse($month)->format('Y年m月') }}
+                    {{ \Carbon\Carbon::parse($month)->format('Y/m') }}
                 </span>
 
                 <input
                     id="monthPicker"
-                    type="date"
+                    type="month"
                     name="month"
-                    value="{{ $month }}-01"
+                    value="{{ $month }}"
                     onchange="document.getElementById('monthForm').submit()"
                     style="position:absolute; opacity:0;">
-
             </form>
-
         </div>
 
         <div class="month-next">
@@ -56,9 +53,7 @@
 
     {{-- 勤怠テーブル --}}
     <div class="attendance-table-box">
-
         <table class="attendance-table">
-
             <thead>
                 <tr>
                     <th>日付</th>
@@ -71,43 +66,40 @@
             </thead>
 
             <tbody>
-
-                @foreach ($attendances as $attendance)
+                @foreach ($list as $row)
 
                 @php
+                $attendance = $row['attendance'];
 
-                $clockIn = $attendance->clock_in
+                $clockIn = $attendance && $attendance->clock_in
                 ? \Carbon\Carbon::parse($attendance->clock_in)
                 : null;
 
-                $clockOut = $attendance->clock_out
+                $clockOut = $attendance && $attendance->clock_out
                 ? \Carbon\Carbon::parse($attendance->clock_out)
                 : null;
 
-                $breakMinutes = $attendance->breaks->sum(function ($b) {
-
+                $breakMinutes = $attendance
+                ? $attendance->breaks->sum(function ($b) {
                 if (!$b->break_end) {
                 return 0;
                 }
 
                 return \Carbon\Carbon::parse($b->break_end)
                 ->diffInMinutes(\Carbon\Carbon::parse($b->break_start));
-                });
+                })
+                : 0;
 
                 $workMinutes = 0;
 
                 if ($clockIn && $clockOut) {
-
-                $workMinutes =
-                $clockOut->diffInMinutes($clockIn) - $breakMinutes;
+                $workMinutes = $clockOut->diffInMinutes($clockIn) - $breakMinutes;
                 }
-
                 @endphp
 
                 <tr>
-
                     <td>
-                        {{ \Carbon\Carbon::parse($attendance->work_date)->locale('ja')->isoFormat('MM/DD(ddd)') }}
+                        {{ $row['date']->locale('ja')->isoFormat('MM/DD(ddd)') }}
                     </td>
 
                     <td>
@@ -119,28 +111,25 @@
                     </td>
 
                     <td>
-                        {{ floor($breakMinutes / 60) }}:{{ str_pad($breakMinutes % 60, 2, '0', STR_PAD_LEFT) }}
+                        {{ $attendance ? floor($breakMinutes / 60) . ':' . str_pad($breakMinutes % 60, 2, '0', STR_PAD_LEFT) : '' }}
                     </td>
 
                     <td>
-                        {{ floor($workMinutes / 60) }}:{{ str_pad($workMinutes % 60, 2, '0', STR_PAD_LEFT) }}
+                        {{ $attendance ? floor($workMinutes / 60) . ':' . str_pad($workMinutes % 60, 2, '0', STR_PAD_LEFT) : '' }}
                     </td>
 
                     <td>
-                        <a href="{{ route('attendance.show', $attendance->id) }}"
-                            class="attendance-detail-link">
+                        @if($attendance)
+                        <a href="{{ route('attendance.show', $attendance->id) }}" class="attendance-detail-link">
                             詳細
                         </a>
+                        @endif
                     </td>
-
                 </tr>
 
                 @endforeach
-
             </tbody>
-
         </table>
-
     </div>
 
 </div>

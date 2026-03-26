@@ -130,31 +130,45 @@ class AttendanceController extends Controller
         $user = Auth::user();
 
         $currentMonth = $request->get('month')
-            ? Carbon::createFromFormat('Y-m', $request->get('month'))->startOfMonth()
+            ? Carbon::parse($request->get('month'))->startOfMonth()
             : Carbon::now()->startOfMonth();
-
         $attendances = Attendance::with('breaks')
             ->where('user_id', $user->id)
             ->whereYear('work_date', $currentMonth->year)
             ->whereMonth('work_date', $currentMonth->month)
             ->orderBy('work_date', 'asc')
-            ->get();
+            ->get()
+            ->keyBy(function ($attendance) {
+                return Carbon::parse($attendance->work_date)->format('Y-m-d');
+            });
+
+        $period = \Carbon\CarbonPeriod::create(
+            $currentMonth->copy()->startOfMonth(),
+            $currentMonth->copy()->endOfMonth()
+        );
+
+        $list = [];
+
+        foreach ($period as $date) {
+            $key = $date->format('Y-m-d');
+
+            $list[] = [
+                'date' => $date,
+                'attendance' => $attendances->get($key)
+            ];
+        }
 
         $prevMonth = $currentMonth->copy()->subMonth()->format('Y-m');
         $nextMonth = $currentMonth->copy()->addMonth()->format('Y-m');
-
-        // ★ここ追加（これが今回の本体修正）
-        $month = $currentMonth;
+        $month = $currentMonth->format('Y-m');
 
         return view('attendance.list', compact(
-            'attendances',
-            'currentMonth',
+            'list',
+            'month',
             'prevMonth',
-            'nextMonth',
-            'month'
+            'nextMonth'
         ));
     }
-
     public function show($id)
     {
         $attendance = Attendance::with('breaks')->findOrFail($id);

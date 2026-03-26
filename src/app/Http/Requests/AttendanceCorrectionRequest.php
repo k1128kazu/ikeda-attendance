@@ -69,6 +69,25 @@ class AttendanceCorrectionRequest extends FormRequest
 
                 return;
             }
+
+            /*
+            ----------------------------------
+            退勤前チェック（追加）
+            ----------------------------------
+            */
+
+            $attendance = Attendance::find($attendanceId);
+
+            if ($attendance && is_null($attendance->clock_out)) {
+
+                $validator->errors()->add(
+                    'attendance',
+                    '退勤前のデータは修正できません'
+                );
+
+                return;
+            }
+
             /*
             ----------------------------------
             出勤退勤チェック

@@ -837,3 +837,132 @@ textarea {
     width: 900px;
     margin: 40px auto;
 }
+body {
+    margin: 0;
+}
+
+
+
+/* =========================================
+   PC（1400px〜1540px）
+========================================= */
+@media screen and (min-width: 1400px) {
+
+    .attendance-list-container,
+    .attendance-detail-wrapper,
+    .attendance-wrapper {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .attendance-table {
+        width: 100%;
+    }
+}
+
+
+/* =========================================
+   タブレット（768px〜850px）
+========================================= */
+@media screen and (min-width: 768px) and (max-width: 850px) {
+
+    /* 共通幅 */
+    .attendance-list-container,
+    .attendance-detail-wrapper,
+    .attendance-wrapper {
+        width: 95%;
+        margin: 0 auto;
+    }
+
+    /* 月ナビ */
+    .attendance-month-nav {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    /* テーブル */
+    .attendance-table {
+        font-size: 14px;
+    }
+
+    .attendance-table th,
+    .attendance-table td {
+        padding: 8px;
+    }
+
+    /* 詳細画面 */
+.attendance-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* ←これ重要 */
+    padding: 16px 0;
+    border-bottom: 1px solid #ddd;
+}
+    .attendance-label {
+        width: 100%;
+        font-weight: bold;
+    }
+
+    .attendance-input-group {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .attendance-time-input {
+        width: 48%;
+    }
+
+    /* 備考 */
+    .attendance-note {
+        width: 100%;
+    }
+
+    /* ボタン */
+    .attendance-submit-area {
+        text-align: center;
+    }
+
+    .attendance-submit-btn {
+        width: 60%;
+    }
+
+    /* 打刻画面 */
+    .attendance-time {
+        font-size: 32px;
+    }
+
+    .attendance-status {
+        font-size: 20px;
+    }
+
+    .btn-black,
+    .btn-white {
+        width: 60%;
+    }
+}
+.attendance-label {
+    width: 150px;
+}
+
+.attendance-input-group {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}
+
+/* 備考の行だけ：ラベル幅を無視して値を中央にする */
+.admin-approve-row:has(.admin-approve-note) {
+    position: relative;
+}
+
+.admin-approve-row:has(.admin-approve-note) .admin-approve-note {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+}

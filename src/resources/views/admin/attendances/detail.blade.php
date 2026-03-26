@@ -5,7 +5,6 @@
 <div class="admin-container">
 
     <h2 class="page-title">勤怠詳細</h2>
-
     <form method="POST"
         action="{{ route('admin.attendances.update', $attendance->id) }}"
         novalidate>
@@ -94,10 +93,19 @@
             </div>
             @endforeach
 
-            <div id="break-area">
-                <div class="detail-row break-row">
+            @php
+            $oldBreakStarts = old('break_start', []);
+            $oldBreakEnds = old('break_end', []);
+            $existingBreakCount = $attendance->breaks->count();
+            $oldBreakCount = max(count($oldBreakStarts), count($oldBreakEnds));
+            $renderUntil = max($existingBreakCount + 1, $oldBreakCount);
+            @endphp
 
-                    <div class="detail-label">休憩{{ count($attendance->breaks) + 1 }}</div>
+            <div id="break-area">
+                @for ($i = $existingBreakCount; $i < $renderUntil; $i++)
+                    <div class="detail-row break-row">
+
+                    <div class="detail-label">休憩{{ $i + 1 }}</div>
 
                     <div class="detail-value time-pair">
 
@@ -105,6 +113,7 @@
                             type="time"
                             name="break_start[]"
                             class="attendance-time-input break-start"
+                            value="{{ $oldBreakStarts[$i] ?? '' }}"
                             @if($isPending) disabled @endif>
 
                         <span>〜</span>
@@ -113,49 +122,55 @@
                             type="time"
                             name="break_end[]"
                             class="attendance-time-input break-end"
+                            value="{{ $oldBreakEnds[$i] ?? '' }}"
                             @if($isPending) disabled @endif>
 
                     </div>
 
-                </div>
+            </div>
+            @endfor
+        </div>
+        <div class="detail-row">
+
+            <div class="detail-label">備考</div>
+
+            <div class="detail-value">
+
+                <textarea
+                    name="note"
+                    class="attendance-note"
+                    @if($isPending) disabled @endif>{{ old('note', $attendance->note ?? '') }}</textarea>
+
             </div>
 
-            <div class="detail-row">
-
-                <div class="detail-label">備考</div>
-
-                <div class="detail-value">
-
-                    <textarea
-                        name="note"
-                        class="attendance-note"
-                        @if($isPending) disabled @endif>{{ old('note', $attendance->note ?? '') }}</textarea>
-
-                </div>
-
-            </div>
-
         </div>
 
-        <div class="detail-button-area">
+</div>
+@if ($errors->any())
+<div style="color:red; margin-bottom:16px;">
+    {{ $errors->first() }}
+</div>
+@endif
 
-            @if(!$isPending)
-            <button
-                type="submit"
-                class="detail-edit-button">
-                修正
-            </button>
-            @endif
+<div class="detail-button-area">
 
-        </div>
+    @if(!$isPending)
+    <button
+        type="submit"
+        class="detail-edit-button">
+        修正
+    </button>
+    @endif
 
-        @if($isPending)
-        <div class="error-message" style="color:#ff6b6b; text-align:right; margin-top:20px;">
-            ※承認待ちのため修正はできません。
-        </div>
-        @endif
+</div>
 
-    </form>
+@if($isPending)
+<div class="error-message" style="color:#ff6b6b; text-align:right; margin-top:20px;">
+    ※承認待ちのため修正はできません。
+</div>
+@endif
+
+</form>
 
 </div>
 
@@ -168,7 +183,7 @@
             return;
         }
 
-        const rows = document.querySelectorAll('.break-row');
+        const rows = document.querySelectorAll('#break-area .break-row');
         const lastRow = rows[rows.length - 1];
 
         const start = lastRow.querySelector('.break-start').value;

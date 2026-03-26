@@ -16,11 +16,26 @@
             ← 前日
         </a>
 
-        <div class="admin-att-date">
-            <span class="admin-att-cal">📅</span>
-            <span>{{ $date->format('Y/m/d') }}</span>
-        </div>
+        <form method="GET" action="{{ route('admin.index') }}" style="display:inline;">
 
+            <span class="admin-att-cal"
+                onclick="document.getElementById('datePicker').showPicker()"
+                style="cursor:pointer;">
+                📅
+            </span>
+
+            <input
+                type="date"
+                id="datePicker"
+                name="date"
+                value="{{ request('date', $date->toDateString()) }}"
+                onchange="this.form.submit()"
+                style="opacity:0; position:absolute; width:0; height:0;">
+
+            <span>{{ $date->format('Y/m/d') }}</span>
+
+        </form>
+        
         <a href="{{ route('admin.index', ['date' => $date->copy()->addDay()->toDateString()]) }}"
             class="admin-att-navbtn">
             翌日 →
@@ -69,7 +84,7 @@
                     <td>{{ sprintf('%d:%02d', floor($breakMinutes/60), $breakMinutes%60) }}</td>
                     <td>{{ sprintf('%d:%02d', floor($workMinutes/60), $workMinutes%60) }}</td>
                     <td><a href="{{ route('admin.attendances.detail', $attendance->id) }}">詳細</a>
-                    </td>    
+                    </td>
                 </tr>
 
                 @endforeach

@@ -7,13 +7,32 @@
     <h2 class="page-title">{{ $staff->name }}さんの勤怠</h2>
 
     <div class="month-nav">
+
         <a href="?month={{ \Carbon\Carbon::parse($month)->subMonth()->format('Y-m') }}">← 前月</a>
 
-        <span>{{ \Carbon\Carbon::parse($month)->format('Y/m') }}</span>
+        <form method="GET" action="{{ route('admin.staff.attendance', $staff->id) }}" style="display:inline;">
+
+            <span
+                onclick="document.getElementById('monthPicker').showPicker()"
+                style="cursor:pointer;">
+                📅
+            </span>
+
+            <input
+                type="month"
+                id="monthPicker"
+                name="month"
+                value="{{ request('month', $month) }}"
+                onchange="this.form.submit()"
+                style="opacity:0; position:absolute; width:0; height:0;">
+
+            <span>{{ \Carbon\Carbon::parse($month)->format('Y/m') }}</span>
+
+        </form>
 
         <a href="?month={{ \Carbon\Carbon::parse($month)->addMonth()->format('Y-m') }}">翌月 →</a>
-    </div>
 
+    </div>
     <table class="table">
         <thead>
             <tr>
