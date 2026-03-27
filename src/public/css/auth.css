@@ -993,3 +993,211 @@ textarea[readonly] {
     font-weight: bold;
     color: #000;
 }
+
+
+
+
+/* ===============================
+   全体
+=============================== */
+.attendance-detail-wrapper {
+    max-width: 900px;
+    margin: 40px auto;
+}
+
+.attendance-detail-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.attendance-detail-box {
+    background: #fff;
+    border-radius: 10px;
+    border: 1px solid #e5e5e5;
+    padding: 10px 30px;
+}
+
+/* ===============================
+   行レイアウト（最重要）
+=============================== */
+.attendance-detail-row {
+    display: grid;
+    grid-template-columns: 150px 120px 40px 120px;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid #eee;
+}
+
+/* ラベル */
+.attendance-detail-label {
+    font-size: 14px;
+    color: #777;
+}
+
+/* ===============================
+   名前
+=============================== */
+.attendance-detail-single {
+    grid-column: 2 / 5;
+    font-size: 22px;
+    font-weight: 500;
+}
+
+/* ===============================
+   日付
+=============================== */
+.attendance-detail-left-text {
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.attendance-detail-right-text {
+    font-size: 24px;
+    font-weight: 500;
+}
+
+/* ===============================
+   時間入力
+=============================== */
+.attendance-detail-left,
+.attendance-detail-right {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.attendance-detail-time-input {
+    width: 110px;
+    height: 44px;
+    font-size: 22px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* timeの中身強制サイズ */
+.attendance-detail-time-input[type="time"] {
+    font-size: 22px;
+}
+
+.attendance-detail-time-input::-webkit-datetime-edit {
+    font-size: 22px;
+}
+
+/* 区切り */
+.attendance-detail-separator {
+    text-align: center;
+    font-size: 22px;
+}
+
+/* ===============================
+   備考
+=============================== */
+.attendance-detail-note-wrap {
+    grid-column: 2 / 5;
+}
+
+.attendance-detail-note {
+    width: 100%;
+    height: 140px;
+    font-size: 22px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* ===============================
+   エラー
+=============================== */
+.attendance-detail-error {
+    color: red;
+    margin-top: 10px;
+}
+
+/* ===============================
+   ボタン
+=============================== */
+.attendance-detail-submit-area {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 30px;
+}
+
+.attendance-detail-submit-btn {
+    width: 120px;
+    height: 45px;
+    font-size: 16px;
+    background: #000;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* ===============================
+   メッセージ
+=============================== */
+.attendance-detail-message {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #888;
+}
+
+
+/* ===============================
+   タイトルサイズをデータと統一
+=============================== */
+.attendance-detail-title {
+    font-size: 24px;
+    /* ← データと同じサイズ */
+    font-weight: 500;
+}
+
+
+/* ===============================
+   時間の間隔を広げる
+=============================== */
+.attendance-detail-row {
+    grid-template-columns: 150px 120px 80px 120px;
+    /*           ラベル   開始    間隔    終了 */
+}
+
+/* 「〜」も中央に調整 */
+.attendance-detail-separator {
+    text-align: center;
+    font-size: 24px;
+}
+
+/* タイトルを確実に大きくする */
+.attendance-detail-title {
+    font-size: 26px !important;
+    font-weight: 600;
+}
+
+/* 左ラベル（名前・日付など）を大きくする */
+.attendance-detail-label {
+    font-size: 24px !important;
+    font-weight: 500;
+    color: #000;
+    /* 薄いグレーを黒に */
+}
+.attendance-detail-row {
+    grid-template-columns: 200px 120px 80px 120px;
+}
+
+/* ▼▼ 強制的にエラーを赤＋右寄せ ▼▼ */
+.attendance-detail-error {
+    color: red !important;
+    text-align: right !important;
+}
+
+/* メッセージを右下＋赤文字 */
+.attendance-detail-message {
+    color: red !important;
+    text-align: right !important;
+}
+
+.attendance-detail-error {
+    color: red !important;
+    text-align: right !important;
+}

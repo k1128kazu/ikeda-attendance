@@ -149,7 +149,7 @@ $clockOutValue = old('clock_out', $attendance->clock_out ? Carbon::parse($attend
             </div>
 
             @if ($errors->any())
-            <div class="attendance-detail-error">
+            <div class="attendance-detail-error" style="color: red; text-align: right;">
                 {{ $errors->first() }}
             </div>
             @endif
