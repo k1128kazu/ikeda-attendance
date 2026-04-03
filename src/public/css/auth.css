@@ -1184,7 +1184,6 @@ textarea[readonly] {
 .attendance-detail-row {
     grid-template-columns: 200px 120px 80px 120px;
 }
-
 /* ▼▼ 強制的にエラーを赤＋右寄せ ▼▼ */
 .attendance-detail-error {
     color: red !important;

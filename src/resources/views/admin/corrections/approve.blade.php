@@ -47,7 +47,7 @@
         @foreach($breaks as $index => $break)
         <div class="admin-approve-row admin-approve-row-3col">
             <div class="admin-approve-label">
-                休憩{{ $index + 1 }}
+                {{ $index === 0 ? '休憩' : '休憩' . ($index + 1) }}
             </div>
 
             <div class="admin-approve-left">

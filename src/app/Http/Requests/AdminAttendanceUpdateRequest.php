@@ -8,7 +8,6 @@ use Carbon\Carbon;
 
 class AdminAttendanceUpdateRequest extends FormRequest
 {
-    protected $stopOnFirstFailure = true;
 
     public function authorize()
     {
@@ -94,54 +93,51 @@ class AdminAttendanceUpdateRequest extends FormRequest
 
                 $end = $ends[$i] ?? null;
 
+                // 両方空 → 無視
                 if (!$start && !$end) continue;
 
+                // 片方だけ → エラー
                 if (!$start || !$end) {
                     $validator->errors()->add(
                         "break_start.$i",
                         '休憩時間が不適切な値です'
                     );
-                    return;
+                    continue;
                 }
 
-                // ★ 修正①（ここ）
-                if (
-                    Carbon::createFromFormat('H:i', $start)
+                // start >= end
+                if (Carbon::createFromFormat('H:i', $start)
                     ->gte(Carbon::createFromFormat('H:i', $end))
                 ) {
+
                     $validator->errors()->add(
                         "break_start.$i",
                         '休憩時間が不適切な値です'
                     );
-                    return;
+                    continue;
                 }
 
-                // ★ 修正②（ここ）
-                if ($clockIn) {
-                    if (
-                        Carbon::createFromFormat('H:i', $start)
-                        ->lt(Carbon::createFromFormat('H:i', $clockIn))
-                    ) {
-                        $validator->errors()->add(
-                            "break_start.$i",
-                            '休憩時間が不適切な値です'
-                        );
-                        return;
-                    }
+                // 出勤前
+                if ($clockIn && Carbon::createFromFormat('H:i', $start)
+                    ->lt(Carbon::createFromFormat('H:i', $clockIn))
+                ) {
+
+                    $validator->errors()->add(
+                        "break_start.$i",
+                        '休憩時間が不適切な値です'
+                    );
+                    continue;
                 }
 
-                // ★ 修正③（ここ）
-                if ($clockOut) {
-                    if (
-                        Carbon::createFromFormat('H:i', $end)
-                        ->gt(Carbon::createFromFormat('H:i', $clockOut))
-                    ) {
-                        $validator->errors()->add(
-                            "break_end.$i",
-                            '休憩時間もしくは退勤時間が不適切な値です'
-                        );
-                        return;
-                    }
+                // 退勤後
+                if ($clockOut && Carbon::createFromFormat('H:i', $end)
+                    ->gt(Carbon::createFromFormat('H:i', $clockOut))
+                ) {
+
+                    $validator->errors()->add(
+                        "break_end.$i",
+                        '休憩時間もしくは退勤時間が不適切な値です'
+                    );
                 }
             }
         });

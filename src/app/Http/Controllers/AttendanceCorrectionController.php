@@ -18,6 +18,7 @@ class AttendanceCorrectionController extends Controller
 
     public function store(AttendanceCorrectionRequest $request, $id)
     {
+
         $attendance = Attendance::findOrFail($id);
         $user = Auth::user();
 
@@ -36,7 +37,11 @@ class AttendanceCorrectionController extends Controller
 
                 $breakEnd = $request->break_end[$index] ?? null;
 
-                if (empty($breakStart) && empty($breakEnd)) {
+                // 両方空なら無視（empty禁止）
+                if (
+                    ($breakStart === null && $breakEnd === null) ||
+                    ($breakStart === '' && $breakEnd === '')
+                ) {
                     continue;
                 }
 

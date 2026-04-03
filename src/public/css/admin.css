@@ -966,3 +966,18 @@ body {
     transform: translateX(-50%);
     text-align: center;
 }
+/* タイトル（左）は通常 */
+.detail-label {
+    font-weight: normal !important;
+}
+
+/* データ（右）は太字 */
+.detail-value,
+.admin-approve-left,
+.admin-approve-right,
+.admin-approve-center {
+    font-weight: bold !important;
+}
+.admin-approve-note {
+    font-weight: bold !important;
+}

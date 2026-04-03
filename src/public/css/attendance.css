@@ -1,0 +1,139 @@
+/* ===== 勤怠詳細画面レイアウト ===== */
+
+.admin-detail-card {
+    width: 100%;
+    background: #fff;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    overflow: hidden;
+}
+
+.detail-row {
+    display: flex;
+    align-items: center;
+    padding: 22px 30px;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.detail-row:last-child {
+    border-bottom: none;
+}
+
+.detail-label {
+    width: 180px;
+    font-weight: bold;
+    color: #555;
+}
+
+.detail-value {
+    flex: 1;
+}
+
+.date-pair {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.time-pair {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.time-pair input {
+    width: 120px;
+    height: 36px;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+textarea {
+    width: 460px;
+    height: 120px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 10px;
+    resize: none;
+}
+
+.detail-button-area {
+    display: flex;
+    justify-content: flex-end;
+    padding: 25px 30px;
+}
+
+.detail-edit-button {
+    background: #000;
+    color: #fff;
+    border: none;
+    padding: 12px 40px;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.attendance-detail-time-input[type="time"] {
+    font-size: 14px;
+}
+
+.attendance-detail-time-input[type="time"]::-webkit-datetime-edit {
+    font-size: 14px;
+}
+.attendance-detail-label {
+    font-size: 14px;
+    font-weight: 600;
+}
+.detail-label {
+    font-size: 14px !important;
+    font-weight: 600;
+}
+.attendance-detail-card .attendance-detail-row .detail-label {
+    font-size: 14px !important;
+}
+
+.attendance-detail-box {
+    font-size: 14px;
+}
+.attendance-detail-box * {
+    font-size: 14px !important;
+}
+
+
+
+.attendance-detail-label {
+    font-weight: normal !important;
+    /* タイトルを通常 */
+}
+
+.attendance-detail-single,
+.attendance-detail-left-text,
+.attendance-detail-right-text {
+    font-weight: bold !important;
+    /* データを太字 */
+}
+.attendance-detail-box div:not(.attendance-detail-label) {
+    font-weight: bold !important;
+}
+.attendance-detail-left-text,
+.attendance-detail-right-text,
+.attendance-detail-single,
+.time-pair input {
+    font-weight: bold !important;
+}
+
+.error-text {
+    color: red;
+    font-size: 12px;
+    margin-top: 6px;
+    display: block;
+    width: 100%;
+}
+
+.attendance-detail-left,
+.attendance-detail-right {
+    display: flex;
+    flex-direction: column;
+}

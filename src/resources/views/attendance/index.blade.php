@@ -24,7 +24,7 @@
     </div>
 
     <div class="attendance-time">
-        {{ now()->format('H:i') }}
+        <span id="current-time">{{ now()->format('H:i') }}</span>
     </div>
 
 
@@ -99,5 +99,17 @@
     @endif
 
 </div>
+<script>
+    function updateClock() {
+        const now = new Date();
 
-@endsection
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+
+        document.getElementById('current-time').textContent =
+            `${hours}:${minutes}`;
+    }
+
+    setInterval(updateClock, 1000); // 1秒ごとでもOK
+    updateClock();
+</script>@endsection
