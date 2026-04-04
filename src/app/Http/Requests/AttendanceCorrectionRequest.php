@@ -104,7 +104,6 @@ class AttendanceCorrectionRequest extends FormRequest
             */
             $breakStarts = $this->break_start ?? [];
             $breakEnds   = $this->break_end ?? [];
-
             foreach ($breakStarts as $index => $start) {
 
                 $end = $breakEnds[$index] ?? null;
@@ -126,14 +125,24 @@ class AttendanceCorrectionRequest extends FormRequest
                     continue;
                 }
 
-                // start >= end
+                // 開始 >= 終了
                 if ($start >= $end) {
                     $validator->errors()->add(
                         "break_start.$index",
-                        "休憩" . ($index + 1) . "の時間が不適切な値です"
+                        "休憩時間が不適切な値です"
+                    );
+                    continue;
+                }
+
+                // ★ ここ追加（これが今回の本体）
+                if ($clockOut && $end > $clockOut) {
+                    $validator->errors()->add(
+                        "break_end.$index",
+                        "休憩時間もしくは退勤時間が不適切な値です"
                     );
                 }
             }
+
         });
     }
 }

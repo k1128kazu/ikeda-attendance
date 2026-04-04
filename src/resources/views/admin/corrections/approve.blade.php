@@ -11,7 +11,7 @@
         <div class="admin-approve-row admin-approve-row-3col">
             <div class="admin-approve-label">名前</div>
             <div class="admin-approve-left">
-                {{ $attendance->user->name }}
+                {{ $request->attendance->user->name }}
             </div>
         </div>
 
@@ -20,11 +20,11 @@
             <div class="admin-approve-label">日付</div>
 
             <div class="admin-approve-left">
-                {{ \Carbon\Carbon::parse($attendance->work_date)->format('Y年') }}
+                {{ \Carbon\Carbon::parse($request->attendance->work_date)->format('Y年') }}
             </div>
 
             <div class="admin-approve-right">
-                {{ \Carbon\Carbon::parse($attendance->work_date)->format('n月j日') }}
+                {{ \Carbon\Carbon::parse($request->attendance->work_date)->format('n月j日') }}
             </div>
         </div>
 
@@ -33,18 +33,26 @@
             <div class="admin-approve-label">出勤・退勤</div>
 
             <div class="admin-approve-left">
-                {{ $attendance->clock_in ? \Carbon\Carbon::parse($attendance->clock_in)->format('H:i') : '' }}
+                {{ $request->request_clock_in
+            ? \Carbon\Carbon::parse($request->request_clock_in)->format('H:i')
+            : ($request->attendance->clock_in
+                ? \Carbon\Carbon::parse($request->attendance->clock_in)->format('H:i')
+                : '') }}
             </div>
 
             <div class="admin-approve-mid">～</div>
 
             <div class="admin-approve-right">
-                {{ $attendance->clock_out ? \Carbon\Carbon::parse($attendance->clock_out)->format('H:i') : '' }}
+                {{ $request->request_clock_out
+            ? \Carbon\Carbon::parse($request->request_clock_out)->format('H:i')
+            : ($request->attendance->clock_out
+                ? \Carbon\Carbon::parse($request->attendance->clock_out)->format('H:i')
+                : '') }}
             </div>
         </div>
-
+        
         {{-- 休憩（ここが修正ポイント） --}}
-        @foreach($breaks as $index => $break)
+        @foreach($request->breaks as $index => $break)
         <div class="admin-approve-row admin-approve-row-3col">
             <div class="admin-approve-label">
                 {{ $index === 0 ? '休憩' : '休憩' . ($index + 1) }}

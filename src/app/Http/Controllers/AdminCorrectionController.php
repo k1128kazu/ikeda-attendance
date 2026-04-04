@@ -27,22 +27,14 @@ class AdminCorrectionController extends Controller
 
     public function show($id)
     {
-        $request = AttendanceCorrectionRequest::with('attendance.user')->findOrFail($id);
-
-        $attendance = $request->attendance;
-
-        $breaks = AttendanceCorrectionBreak::where(
-            'attendance_correction_request_id',
-            $request->id
-        )->get();
-
-        return view('admin.corrections.approve', compact(
-            'request',
-            'attendance',
+        $request = AttendanceCorrectionRequest::with([
+            'attendance.user',
             'breaks'
-        ));
+        ])->findOrFail($id);
+
+        return view('admin.corrections.approve', compact('request'));
     }
-    
+        
     public function approve($id)
     {
         $correction = AttendanceCorrectionRequest::findOrFail($id);

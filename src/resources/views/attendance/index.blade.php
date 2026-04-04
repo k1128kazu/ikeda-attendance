@@ -70,13 +70,6 @@
 
     <div class="attendance-btn-group">
 
-        <form method="POST" action="/attendance/clock-out" novalidate>
-            @csrf
-            <button class="btn-black">
-                退勤
-            </button>
-        </form>
-
         <form method="POST" action="/attendance/break-out" novalidate>
             @csrf
             <button class="btn-white">
