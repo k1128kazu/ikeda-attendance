@@ -258,6 +258,22 @@ docker compose exec php php artisan migrate --seed
 必要なユーザー・勤怠関連データがあらかじめ投入される想定です。  
 詳細は seeder / factory を参照してください。
 
+※ 初回起動時に以下のエラーが発生する場合があります。
+
+SQLSTATE[HY000] [2002] Connection refused
+
+または、意図しないデータベース（laravel など）へ接続される場合があります。
+
+これは Laravel の設定キャッシュにより、`.env` の内容が正しく反映されていないことが原因です。
+
+その場合は、以下のコマンドを実行してください。
+
+```bash
+docker compose exec php rm -f bootstrap/cache/config.php
+
+その後、再度マイグレーション・シーディングを実行してください。
+
+docker compose exec php php artisan migrate --seed
 ---
 
 ### 7.10 Mail 設定反映
@@ -278,6 +294,18 @@ docker compose restart php
 
 正常に起動していれば、トップページから会員登録画面へ遷移します。
 
+### 8.1 休憩入力欄の仕様
+
+本システムでは、休憩時間を複数登録できるように設計しています。
+
+初期表示では休憩入力欄は1行のみ表示されますが、  
+休憩開始時間と休憩終了時間の両方を入力すると、次の休憩入力欄が自動的に追加されます。
+
+この動作は繰り返し行われるため、必要に応じて休憩時間を実質的に無制限に追加することができます。
+
+- 初期表示：1行
+- 開始・終了の両方を入力：次行を自動追加
+- 以後も同様に追加可能
 ---
 
 ## 9. メール確認（MailHog）
@@ -311,7 +339,7 @@ mysql -u root -p
 MySQL に入ったら、以下を実行してください。
 
 ```sql
-CREATE DATABASE laravel_db_testing
+CREATE DATABASE laravel_test
   CHARACTER SET utf8mb4
   COLLATE utf8mb4_unicode_ci;
 ```
@@ -333,7 +361,6 @@ PHP コンテナに入り、`.env.testing` を作成して初期化します。
 docker compose exec php bash
 cp .env .env.testing
 php artisan key:generate --env=testing
-php artisan migrate --env=testing
 php artisan config:clear
 php artisan cache:clear
 exit
@@ -351,7 +378,7 @@ APP_ENV=testing
 DB_CONNECTION=mysql
 DB_HOST=mysql
 DB_PORT=3306
-DB_DATABASE=laravel_db_testing
+DB_DATABASE=laravel_test
 DB_USERNAME=root
 DB_PASSWORD=root
 
@@ -363,19 +390,24 @@ MAIL_PASSWORD=null
 MAIL_ENCRYPTION=null
 MAIL_FROM_ADDRESS=test@coachtech.local
 MAIL_FROM_NAME="COACHTECH"
-```
 
 ---
 
 ### 10.4 テスト実行
 
+本プロジェクトではテスト専用データベース（laravel_test）を使用しています。
+
+必ず以下のコマンドでテストを実行してください。
+
 ```bash
-docker compose exec php php artisan test
+docker compose exec php php artisan test --env=testing
 ```
+※ 注意
+--env=testing を付けずに実行すると、本番用データベース（laravel_db）が初期化される可能性があります。
 
 実行結果：
 
-- **38 tests passed**
+- **46 tests passed**
 
 すべてのテストが成功していることを確認済みです。
 
