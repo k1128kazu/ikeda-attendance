@@ -28,7 +28,7 @@ class AdminAuthController extends Controller
                 Auth::logout();
 
                 return back()->withErrors([
-                    'email' => '管理者アカウントではありません。',
+                    'email' => 'ログイン情報が登録されていません',
                 ]);
             }
 
